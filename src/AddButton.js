@@ -9,6 +9,7 @@ export default function AddButton() {
       <Fab color="primary" aria-label="add">
         <AddIcon />
       </Fab>
+      Add another account!
     </Box>
   );
 }
