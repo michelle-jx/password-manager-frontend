@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, Typography, CardActions, Button, CardMedia, Grid } from '@mui/material'
 
 
 function AccountCard({ account }) {
-  const [logininfo, setLogininfo] = useState([])
+
 
   return (
       <Grid

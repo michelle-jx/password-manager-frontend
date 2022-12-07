@@ -1,12 +1,16 @@
 import React from 'react'
 
-function PinInput({handleSubmit}) {
+function AddAccount({handleSubmit}) {
 
     return (
         <div>
             <form>
                 <label>
-                    Pin:
+                    Website:
+                    <input type="text" name="name" />
+                    Username:
+                    <input type="text" name="name" />
+                    Password:
                     <input type="text" name="name" />
                 </label>
                 <input type="submit" value="Submit" onSubmit={handleSubmit}/>
@@ -15,4 +19,4 @@ function PinInput({handleSubmit}) {
     )
 }
 
-export default PinInput;
+export default AddAccount;
