@@ -4,6 +4,24 @@ import { Card, CardContent, Typography, CardActions, Button, CardMedia, Grid } f
 
 function AccountCard({ account }) {
 
+  /* const mappedPasswords = account.passwords.map((password) => {
+    return password.password_name.map((user) => {
+      return user.passwords.map((password) => {
+        return console.log(password.users)
+      })
+    })}) */
+
+    const mappedPasswords = account.passwords.map((password) => {
+      return password.password_name
+    })
+
+    const mappedUsers = account.passwords.map((password) => {
+      return password.users.map((user) => {
+        return user.name
+      })
+    })
+  
+
 
   return (
       <Grid
@@ -25,8 +43,8 @@ function AccountCard({ account }) {
           />
           <CardContent>
             <Typography gutterBottom variant='h5' component='div'>{account.websites}</Typography>
-            <Typography variant='body2' color='text.secondary'>username here</Typography>
-            <Typography variant='body2' color='text.secondary'>password here</Typography>
+            <Typography variant='body2' color='text.secondary'>{mappedUsers}</Typography>
+            <Typography variant='body2' color='text.secondary'>{mappedPasswords}</Typography>
           </CardContent>
           <CardActions>
             <Button>Edit</Button>
