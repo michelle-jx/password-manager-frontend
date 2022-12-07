@@ -19,6 +19,10 @@ function AccountPage() {
         else setCorrectPin(false)
     }
 
+    function handleAddAccount() {
+        //post request here
+    }
+
     useEffect(()=>{
         fetchAll()
     },[])
@@ -56,7 +60,7 @@ function AccountPage() {
     return (
         <div style={{display: correctPin? 'Show' : 'Hide'}}>
             <PinInput handleSubmit={handleSubmit}/>
-            <AddButton />
+            <AddButton onClick={handleAddAccount}/>
             <AccountCollection accounts={accounts} users={users} passwords={passwords} />
         </div>
     )
