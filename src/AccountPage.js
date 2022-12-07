@@ -7,14 +7,16 @@ function AccountPage() {
     const [accounts, setAccounts] = useState([])
     const [users, setUsers] = useState([])
     const [passwords, setPasswords] = useState([])
-    const [visibleCard, setVisibleCard] = useState(false)
-    const [correctPin, setCorrectPin] = useState("")
+    const [correctPin, setCorrectPin] = useState(false)
 
+
+    
+    //if pin matches DB, setCorrectPin = true
     function handleSubmit(e) {
         //if pin = pin from DB, need toggle card details
         if (users.pin.includes(e.target.value))//how do i grab pin by user?? .find first to see if it exists within the users.pin array?
-          setVisibleCard(true)
-        else setVisibleCard(false)
+          setCorrectPin(true)
+        else setCorrectPin(false)
     }
 
     useEffect(()=>{
@@ -52,10 +54,10 @@ function AccountPage() {
     }
 
     return (
-        <div>
+        <div style={{display: correctPin? 'Show' : 'Hide'}}>
             <PinInput handleSubmit={handleSubmit}/>
             <AddButton />
-            <AccountCollection accounts={accounts} users={users} passwords={passwords}/>
+            <AccountCollection accounts={accounts} users={users} passwords={passwords} />
         </div>
     )
 }
