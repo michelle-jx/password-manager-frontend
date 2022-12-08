@@ -2,37 +2,57 @@ import React from 'react';
 import { Card, CardContent, Typography, CardActions, Button, CardMedia, Grid } from '@mui/material'
 
 
-function AccountCard({ account }) {
+function AccountCard({ account, onPatchAccount, onDeleteAccount }) {
 
-  /* const mappedPasswords = account.passwords.map((password) => {
-    return password.password_name.map((user) => {
-      return user.passwords.map((password) => {
-        return console.log(password.users)
-      })
-    })}) */
+  const mappedPasswords = account.passwords.map((password) => {
+    return password.password_name
+  })
 
-    const mappedPasswords = account.passwords.map((password) => {
-      return password.password_name
+  const mappedUsers = account.passwords.map((password) => {
+    return password.users.map((user) => {
+      return user.name
     })
+  })
 
-    const mappedUsers = account.passwords.map((password) => {
-      return password.users.map((user) => {
-        return user.name
-      })
+  //TODO ok it works but i don't know why?? 
+  //passing account.websites from here, then websites in acct page 
+  function handleDelete(e) {
+    fetch(`http://localhost:9292/accounts/${account.id}`, {
+      method: "DELETE"
     })
-  
+      .then(resp => resp.json())
+      .then(onDeleteAccount(account.websites))
+  }
 
+  function handlePatch(e) {
+    fetch(`http://localhost:9292/accounts/${account.id}`, {
+      method: "PATCH",
+      headers: {'content-type': "application/json"},
+      body: JSON.stringify({
+        account: {
+          websites: e.target.value[0],
+          passwords: [
+            {
+              password_name: e.target.value[1],
+              users: [{ name: e.target.value[2], }]
+            }
+          ]}
+      }),
+    })
+    .then(resp => resp.json())
+    .then(updatedAccount => onPatchAccount(updatedAccount))
+  }
 
   return (
-      <Grid
-        container
-        spacing={2}
-        alignItems="flex-start"
-        justify="center"
-        /* direction="row"
-        style={{ minHeight: '10vh' }} */
-      >
-    {/* <Box width='600px' display='flex'> */}
+    <Grid
+      container
+      spacing={2}
+      alignItems="flex-start"
+      justify="center"
+    /* direction="row"
+    style={{ minHeight: '10vh' }} */
+    >
+      {/* <Box width='600px' display='flex'> */}
       <Grid item xs={3}>
         <Card>
           <CardMedia
@@ -47,12 +67,12 @@ function AccountCard({ account }) {
             <Typography variant='body2' color='text.secondary'>{mappedPasswords}</Typography>
           </CardContent>
           <CardActions>
-            <Button>Edit</Button>
-            <Button>Delete</Button>
+            <Button onClick={handlePatch}>Edit</Button>
+            <Button onClick={handleDelete}>Delete</Button>
           </CardActions>
         </Card>
       </Grid>
-    {/* </Box> */}
+      {/* </Box> */}
     </Grid>
   )
 

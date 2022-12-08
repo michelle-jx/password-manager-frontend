@@ -1,9 +1,9 @@
 import React from 'react'
 import AccountCard from './AccountCard'
 
-function AccountCollection({accounts}) {
+function AccountCollection({accounts, onPatchAccount, onDeleteAccount}) {
     const accountList = accounts.map((account) => {
-        return <AccountCard key={account.id} account={account} />
+        return <AccountCard key={account.id} account={account} onPatchAccount={onPatchAccount} onDeleteAccount={onDeleteAccount}/>
     })
 
     return (

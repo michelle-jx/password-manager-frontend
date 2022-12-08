@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import AccountCollection from './AccountCollection'
-import AddAccount from "./AddAccount";
+import AddEditAccount from "./AddEditAccount";
 import AddButton from './AddButton'
 
 function AccountPage() {
     const [accounts, setAccounts] = useState([])
-    const [users, setUsers] = useState([])
-    const [passwords, setPasswords] = useState([])
     const [correctPin, setCorrectPin] = useState(false)
-
-    
-
     
     useEffect(() => {
         fetchAll()
@@ -25,23 +20,36 @@ function AccountPage() {
             })
     }
 
-    //if pin matches DB, setCorrectPin = true
+    //if account.websites.!includes(website), run POST
+    //else run PATCH
      function handleSubmit(e) {
         //     setCorrectPin(true)
         e.preventDefault();
-        console.log("submit") 
-    }
+        /*  if (!account.websites.includes(websites)) //how to give access to websites?
+            //POST
+            else handlePatchAccount() */
+     }
 
-    //where do we put the post??
     function handleAddAccount(newAccount) {
         setAccounts([...accounts, newAccount])
     }
 
+    
+    function handlePatchAccount(websites) {
+        
+    }
+    
+    function handleDeleteAccount(websites) {
+        //write the filtered array here, return all account.id !== id
+        setAccounts(accounts.filter((account) => {
+            return account.websites !== websites}))
+    }
+
     return (
             <div style={{ display: correctPin ? 'Show' : 'Hide' }}>
-                <AddAccount handleSubmit={handleSubmit}/>
+                <AddEditAccount onSubmit={handleSubmit}/>
                 <AddButton onClick={handleAddAccount} />
-                <AccountCollection accounts={accounts}/>
+                <AccountCollection accounts={accounts} onPatchAccount={handlePatchAccount} onDeleteAccount={handleDeleteAccount}/>
             </div>
     )
 }

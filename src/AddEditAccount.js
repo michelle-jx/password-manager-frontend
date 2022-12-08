@@ -1,6 +1,6 @@
 import React from 'react'
 
-function AddAccount({handleSubmit}) {
+function AddEditAccount({onSubmit}) {
 
     return (
         <div>
@@ -13,10 +13,10 @@ function AddAccount({handleSubmit}) {
                     Password:
                     <input type="text" name="name" />
                 </label>
-                <input type="submit" value="Submit" onSubmit={handleSubmit}/>
+                <input type="submit" value="Submit" onSubmit={onSubmit}/>
             </form>
         </div>
     )
 }
 
-export default AddAccount;
+export default AddEditAccount;
