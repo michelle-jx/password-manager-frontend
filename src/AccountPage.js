@@ -9,13 +9,13 @@ function AccountPage() {
     const [passwords, setPasswords] = useState([])
     const [correctPin, setCorrectPin] = useState(false)
 
-    
 
-    
+
+
     useEffect(() => {
         fetchAll()
     }, [])
-    
+
     const fetchAll = () => {
         fetch("http://localhost:9292/accounts")
             .then(resp => resp.json())
@@ -25,24 +25,31 @@ function AccountPage() {
             })
     }
 
-    //if pin matches DB, setCorrectPin = true
-     function handleSubmit(e) {
-        //     setCorrectPin(true)
-        e.preventDefault();
-        console.log("submit") 
-    }
 
-    //where do we put the post??
+    // const [accountData, setAccountData] = useState({
+    //     website: "",
+    //     username: "",
+    //     password: ""
+    // })
+
     function handleAddAccount(newAccount) {
         setAccounts([...accounts, newAccount])
     }
 
+
+
+
+
+
+
+
+
     return (
-            <div style={{ display: correctPin ? 'Show' : 'Hide' }}>
-                <AddAccount handleSubmit={handleSubmit}/>
-                <AddButton onClick={handleAddAccount} />
-                <AccountCollection accounts={accounts}/>
-            </div>
+        <div style={{ display: correctPin ? 'Show' : 'Hide' }}>
+            <AddAccount  handleAddAccount={handleAddAccount} accounts={accounts}/>
+            <AddButton onClick={handleAddAccount} />
+            <AccountCollection accounts={accounts} />
+        </div>
     )
 }
 
