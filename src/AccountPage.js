@@ -23,6 +23,7 @@ function AccountPage() {
     function handleSubmit(e) {
         e.preventDefault();
         console.log('submitted')
+        /* console.log(typeof(e.target.websites.value)) */
         fetch("http://localhost:9292/accounts", {
           method: "POST",
           headers: {
