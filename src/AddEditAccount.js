@@ -4,16 +4,16 @@ function AddEditAccount({onSubmit}) {
 
     return (
         <div>
-            <form>
+            <form onSubmit={onSubmit}>
                 <label>
-                    Website:
-                    <input type="text" name="name" />
+                    Websites:
+                    <input type="text" name="websites" />
                     Username:
-                    <input type="text" name="name" />
+                    <input type="text" name="username" />
                     Password:
-                    <input type="text" name="name" />
+                    <input type="text" name="password" />
                 </label>
-                <input type="submit" value="Submit" onSubmit={onSubmit}/>
+                <input type="submit" value="Submit"/>
             </form>
         </div>
     )
